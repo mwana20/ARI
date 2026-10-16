@@ -5,7 +5,6 @@ import {
   ARI_MISSION,
   ARI_COMMITMENTS,
   FOCUS_AREAS,
-  VERIFIED_NEWS,
   ARI_REGISTRATION,
   WHATSAPP_URL,
 } from '../data/organizationData';
@@ -465,61 +464,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <div className="lg:col-span-7">
               <CPRKnowledgeAssistant />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. Verified News & Announcements */}
-      <section className="py-16 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
-            <div>
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#74172F] mb-2">
-                <span className="w-2 h-2 rounded-full bg-[#74172F]"></span>
-                <span>Updates & Public Notices</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#29252A] tracking-tight">
-                Verified News & Organizational Notices
-              </h2>
-            </div>
-
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {VERIFIED_NEWS.map((item, index) => (
-              <article
-                key={item.id}
-                className={`${index > 0 ? 'hidden md:flex' : 'flex'} bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-2xs flex-col justify-between hover:border-neutral-300 transition-colors`}
-              >
-                <div>
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-44 object-cover"
-                  />
-                  <div className="p-5 space-y-2">
-                    <div className="flex items-center gap-2 text-xs text-[#686168]">
-                      <span>{item.date}</span>
-                      <span aria-hidden="true">·</span>
-                      <span>{item.category}</span>
-                      {item.location && (
-                        <>
-                          <span aria-hidden="true">·</span>
-                          <span>{item.location}</span>
-                        </>
-                      )}
-                    </div>
-                    <h3 className="text-base font-bold text-[#29252A] leading-snug">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-[#686168] line-clamp-3 leading-relaxed">
-                      {item.summary}
-                    </p>
-                  </div>
-                </div>
-
-              </article>
-            ))}
           </div>
         </div>
       </section>

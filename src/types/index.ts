@@ -20,18 +20,6 @@ export interface FocusArea {
   keyInterventions: string[];
 }
 
-export interface NewsItem {
-  id: string;
-  title: string;
-  category: 'Announcement' | 'Community Outreach' | 'Partnership' | 'Public Health';
-  date: string;
-  summary: string;
-  content: string;
-  image: string;
-  location?: string;
-  readTime: string;
-}
-
 export interface RegistrationDetails {
   organizationName: string;
   entityType: string;

@@ -1,4 +1,4 @@
-import { FocusArea, NewsItem, RegistrationDetails, SocialLinks } from '../types';
+import { FocusArea, RegistrationDetails, SocialLinks } from '../types';
 
 export const ARI_REGISTRATION: RegistrationDetails = {
   organizationName: 'Acute Resuscitation Initiative (ARI) Ltd',
@@ -156,38 +156,3 @@ export const FOCUS_AREAS: FocusArea[] = [
   },
 ];
 
-export const VERIFIED_NEWS: NewsItem[] = [
-  {
-    id: 'incorporation-announcement',
-    title: 'Acute Resuscitation Initiative (ARI) Ltd Formally Incorporated to Expand CPR Education Across Uganda',
-    category: 'Announcement',
-    date: 'November 2024',
-    summary: 'ARI Ltd has officially completed its registration under the laws of Uganda as a company limited by guarantee, establishing its institutional headquarters in Mbale District.',
-    content: 'Acute Resuscitation Initiative (ARI) Ltd has received its official Certificate of Incorporation (Reg. No. 80034997267053) from the Uganda Registration Services Bureau (URSB). Established as a non-profit company limited by guarantee without share capital, ARI is dedicated to addressing the critical gap in bystander cardiopulmonary resuscitation (CPR) awareness and practical first-response skills throughout Uganda.\n\nOperating from its registered office in Mbale District, the organization has commenced stakeholder consultations with local health institutions, educators, and community leadership to structure sustainable community training modules.',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80',
-    location: 'Mbale District, Uganda',
-    readTime: '3 min read',
-  },
-  {
-    id: 'community-preparedness-dialogue',
-    title: 'Consultations Open for Community Resuscitation Education Framework in Eastern Uganda',
-    category: 'Community Outreach',
-    date: 'December 2024',
-    summary: 'Dialogue underway with community health workers, local educators, and civil society actors to design culturally grounded CPR instruction formats.',
-    content: 'To ensure CPR education is accessible and culturally resonant, ARI has commenced preliminary discussions with community stakeholders across Nabuyonga Ward and Northern Division in Mbale. Key considerations include delivering hands-on demonstrations in local languages, engaging transport and trade associations who are frequently first on scene during public collapses, and producing clear visual emergency action guides.',
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=80',
-    location: 'Mbale, Uganda',
-    readTime: '4 min read',
-  },
-  {
-    id: 'partnership-invitation-2025',
-    title: 'ARI Invites Academic, Healthcare, and Corporate Partners to Strengthen First-Response Education',
-    category: 'Partnership',
-    date: 'January 2025',
-    summary: 'Organizations committed to public health, youth empowerment, and emergency preparedness are invited to explore collaborative initiatives with ARI.',
-    content: 'Through its strategic partnership framework, ARI is actively welcoming collaboration with secondary schools, tertiary colleges, corporate employers, and public health advocates. Collaborative initiatives focus on delivering hands-only CPR sessions, supporting training equipment procurement (such as adult training manikins), and fostering an enduring culture of civic emergency preparedness across Uganda.',
-    image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1000&q=80',
-    location: 'Uganda (Nationwide)',
-    readTime: '3 min read',
-  },
-];
