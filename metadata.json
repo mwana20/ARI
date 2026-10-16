@@ -1,0 +1,6 @@
+{
+  "name": "Acute Resuscitation Initiative (ARI) Ltd",
+  "description": "Advancing CPR awareness, education, and life-saving emergency resuscitation skills across Ugandan communities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
