@@ -48,3 +48,37 @@
     scroll-behavior: auto !important;
   }
 }
+
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  .certificate-print-area,
+  .certificate-print-area * {
+    visibility: visible !important;
+  }
+
+  .certificate-print-area {
+    position: fixed !important;
+    inset: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 10mm !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  .certificate-print-area img {
+    display: block !important;
+    width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+  }
+}

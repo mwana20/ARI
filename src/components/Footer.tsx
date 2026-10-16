@@ -32,10 +32,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCertificate })
           {/* Column 1: Organization & Identity */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#74172F] text-white flex flex-col items-center justify-center font-bold tracking-tighter border border-rose-300/20 shadow-xs">
-                <span className="text-sm font-extrabold leading-none">ARI</span>
-                <span className="text-[7px] uppercase tracking-widest text-rose-200 leading-none mt-0.5">UG</span>
-              </div>
+              <img src="/assets/logo.png" alt="ARI: time, knowledge, survival" className="h-10 w-auto max-w-[110px] shrink-0 object-contain" />
               <div>
                 <span className="block text-base font-bold text-white tracking-tight">
                   Acute Resuscitation Initiative
@@ -97,29 +94,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCertificate })
               </li>
               <li>
                 <button
-                  onClick={() => handleNav('resources')}
-                  type="button"
-                  className="hover:text-white transition-colors text-left"
-                >
-                  CPR Resources
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('news')}
-                  type="button"
-                  className="hover:text-white transition-colors text-left"
-                >
-                  News & Events
-                </button>
-              </li>
-              <li>
-                <button
                   onClick={() => handleNav('contact')}
                   type="button"
                   className="hover:text-white transition-colors text-left"
                 >
                   Contact ARI
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleNav('donate')}
+                  type="button"
+                  className="hover:text-white transition-colors text-left"
+                >
+                  Donate
                 </button>
               </li>
             </ul>
@@ -288,13 +276,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCertificate })
               Governance & Oversight
             </button>
             <span className="text-rose-200/30">·</span>
-            <button
-              onClick={() => handleNav('resources')}
-              type="button"
-              className="hover:text-white transition-colors"
-            >
+            <span>
               Educational Disclaimer
-            </button>
+            </span>
           </div>
         </div>
       </div>

@@ -114,23 +114,35 @@ export const ContactView: React.FC<ContactViewProps> = ({
   return (
     <div className="space-y-0">
       {/* Page Header */}
-      <section className="bg-gradient-to-b from-[#4A0D20] to-[#74172F] text-white py-16 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-4">
-            <div className="flex items-center gap-2 text-xs font-semibold text-rose-200">
-              <span>Get in Touch</span>
-              <span aria-hidden="true">·</span>
-              <span>Partnership & General Inquiries</span>
-              <span aria-hidden="true">·</span>
-              <span>Mbale, Uganda</span>
+      <section className="relative isolate overflow-hidden border-b border-neutral-200 bg-[#1e221d] text-white lg:bg-gradient-to-b lg:from-[#4A0D20] lg:to-[#74172F] lg:py-16 xl:py-20">
+        <div className="max-w-7xl mx-auto px-0 lg:px-8">
+          <div className="relative grid min-h-[390px] grid-cols-1 items-start sm:min-h-[430px] lg:min-h-0 lg:grid-cols-12 lg:gap-8 lg:items-center">
+            <div className="relative z-10 w-full space-y-4 px-4 pb-8 pt-[10px] sm:px-8 sm:pb-10 lg:col-span-7 lg:px-0 lg:py-0">
+              <div className="hidden flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/85 sm:text-xs lg:flex lg:text-rose-200">
+                <span>Get in Touch</span>
+                <span aria-hidden="true">·</span>
+                <span>Partnership & General Inquiries</span>
+                <span aria-hidden="true">·</span>
+                <span>Mbale, Uganda</span>
+              </div>
+              <h1 className="text-[2.5rem] font-extrabold leading-[1.02] tracking-tight sm:text-5xl lg:text-[clamp(2.2rem,4vw,4rem)] lg:leading-tight">
+                Contact Acute Resuscitation Initiative (ARI) Ltd
+              </h1>
+              <p className="max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg lg:text-rose-100/90">
+                We welcome inquiries from educational institutions, community
+                leaders, healthcare professionals, donors, and the general public.
+              </p>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
-              Contact Acute Resuscitation Initiative (ARI) Ltd
-            </h1>
-            <p className="text-base sm:text-lg text-rose-100/90 leading-relaxed">
-              We welcome inquiries from educational institutions, community
-              leaders, healthcare professionals, donors, and the general public.
-            </p>
+            <div className="absolute inset-0 z-0 lg:relative lg:inset-auto lg:col-span-5">
+              <div className="absolute inset-0 overflow-hidden lg:relative lg:rounded-3xl lg:border lg:border-white/10 lg:shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80"
+                  alt="Consultation and communication between community teams and health advocates"
+                  className="h-full w-full object-cover lg:h-[22rem]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/45 to-black/80 lg:bg-gradient-to-t lg:from-[#4A0D20]/80 lg:via-[#4A0D20]/10 lg:to-transparent" />
+              </div>
+            </div>
           </div>
         </div>
       </section>

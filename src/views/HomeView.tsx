@@ -23,7 +23,6 @@ import {
   Users,
   CheckCircle,
   ExternalLink,
-  ChevronRight,
   Sparkles,
 } from 'lucide-react';
 
@@ -41,85 +40,139 @@ export const HomeView: React.FC<HomeViewProps> = ({
   return (
     <div className="space-y-0">
       {/* 1. Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#FAF7F7] via-white to-[#F3EEEE] py-16 sm:py-24 lg:py-28 border-b border-neutral-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            {/* Left Content */}
-            <div className="lg:col-span-7 space-y-6">
-              {/* Quiet unboxed metadata kicker */}
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#74172F]">
-                <span>Republic of Uganda</span>
-                <span aria-hidden="true">·</span>
-                <span>Public Health & CPR Education</span>
-                <span aria-hidden="true">·</span>
-                <span>Reg. No. 80034997267053</span>
-              </div>
+      <section className="relative overflow-hidden border-b border-neutral-200 bg-[#FAF7F7]">
+        <div className="lg:hidden">
+          <div className="relative isolate min-h-[500px] bg-[#1e221d] sm:min-h-[520px]">
+            <img
+              src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
+              alt="CPR instruction on an adult training mannequin with medical instructor guiding learners"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/45 to-black/80" />
 
-              {/* Exact Hero Headline from brief */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#29252A] tracking-tight leading-[1.12]">
-                A Nation Prepared to{' '}
-                <span className="text-[#74172F] underline decoration-rose-200 decoration-wavy decoration-2">
-                  Save Lives.
-                </span>
-              </h1>
-
-              {/* Supporting Text verbatim from brief */}
-              <p className="text-base sm:text-lg text-[#686168] leading-relaxed max-w-2xl">
-                Acute Resuscitation Initiative (ARI) Ltd is working to expand CPR
-                awareness, education, and life-saving skills across Uganda,
-                empowering individuals and communities to respond confidently
-                when emergencies occur.
-              </p>
-
-              {/* Hero Action Buttons */}
-              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                <button
-                  onClick={() => onNavigate('work')}
-                  type="button"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold text-white bg-[#74172F] hover:bg-[#5e1225] active:bg-[#4A0D20] rounded-xl shadow-sm hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#74172F]"
-                >
-                  <span>Explore Our Work</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-
-                <button
-                  onClick={onOpenPartner}
-                  type="button"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold text-[#74172F] bg-white hover:bg-rose-50 border border-[#74172F]/30 rounded-xl transition-all duration-200 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#74172F]"
-                >
-                  <HeartHandshake className="w-4 h-4 text-[#74172F]" />
-                  <span>Partner With ARI</span>
-                </button>
-              </div>
-
-              {/* Verified Institutional Assurance */}
-              <div className="pt-4 flex items-center gap-4 text-xs text-neutral-500">
-                <div className="flex items-center gap-1.5 text-neutral-700 font-medium">
-                  <ShieldCheck className="w-4 h-4 text-[#74172F]" />
-                  <span>Incorporated in Uganda</span>
+            <div className="relative z-10 flex min-h-[500px] items-start px-4 pb-8 pt-[10px] sm:min-h-[520px] sm:px-8 sm:pb-10">
+              <div className="w-full max-w-xl">
+                <div className="hidden flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/85 sm:text-xs">
+                  <span>Republic of Uganda</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Public Health & CPR Education</span>
                 </div>
-                <span className="text-neutral-300">|</span>
-                <span>Non-Profit Guarantee</span>
-                <span className="text-neutral-300">|</span>
-                <span>Mbale District Headquarters</span>
+
+                <h1 className="text-[2.5rem] font-extrabold leading-[1.02] tracking-tight text-white sm:text-5xl">
+                  A Nation Prepared to <span className="text-rose-200">Save Lives.</span>
+                </h1>
+
+                <p className="mt-4 max-w-lg text-base leading-relaxed text-white/90 sm:text-lg">
+                  Acute Resuscitation Initiative (ARI) Ltd is working to expand CPR awareness, education, and life-saving skills across Uganda, empowering individuals and communities to respond confidently when emergencies occur.
+                </p>
+
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <button
+                    onClick={() => onNavigate('work')}
+                    type="button"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#74172F] px-6 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-[#5e1225] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:w-auto"
+                  >
+                    <span>Explore Our Work</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={onOpenPartner}
+                    type="button"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-white/70 bg-white/95 px-6 py-3.5 text-sm font-bold text-[#74172F] transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:w-auto"
+                  >
+                    <HeartHandshake className="h-4 w-4" />
+                    <span>Partner With ARI</span>
+                  </button>
+                </div>
+
+                <p className="mt-5 text-xs font-medium text-white/80">
+                  Incorporated in Uganda <span className="mx-1.5 text-white/50">·</span> Mbale District Headquarters
+                </p>
               </div>
             </div>
+          </div>
+        </div>
 
-            {/* Right Hero Image Card */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-xl border border-neutral-200 bg-white group">
-                <img
-                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
-                  alt="CPR instruction on an adult training mannequin with medical instructor guiding learners"
-                  className="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-102 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
-                  <span className="text-xs uppercase tracking-widest text-rose-200 font-semibold mb-1">
-                    Hands-On Resuscitation Training
+        <div className="hidden lg:block">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 xl:py-20">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+              {/* Left Content */}
+              <div className="lg:col-span-7 space-y-6">
+                {/* Quiet unboxed metadata kicker */}
+                <div className="flex items-center gap-2 text-xs font-semibold text-[#74172F]">
+                  <span>Republic of Uganda</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Public Health & CPR Education</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Reg. No. 80034997267053</span>
+                </div>
+
+                {/* Exact Hero Headline from brief */}
+                <h1 className="text-[clamp(2.25rem,5vw,4.5rem)] font-extrabold text-[#29252A] tracking-tight leading-[1.08]">
+                  A Nation Prepared to{' '}
+                  <span className="text-[#74172F] underline decoration-rose-200 decoration-wavy decoration-2">
+                    Save Lives.
                   </span>
-                  <p className="text-sm font-semibold text-white/95">
-                    Realistic manikin training builds the muscle memory and calm confidence needed to restart a heart.
-                  </p>
+                </h1>
+
+                {/* Supporting Text verbatim from brief */}
+                <p className="text-sm sm:text-base lg:text-lg text-[#686168] leading-relaxed max-w-2xl">
+                  Acute Resuscitation Initiative (ARI) Ltd is working to expand CPR
+                  awareness, education, and life-saving skills across Uganda,
+                  empowering individuals and communities to respond confidently
+                  when emergencies occur.
+                </p>
+
+                {/* Hero Action Buttons */}
+                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <button
+                    onClick={() => onNavigate('work')}
+                    type="button"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold text-white bg-[#74172F] hover:bg-[#5e1225] active:bg-[#4A0D20] rounded-xl shadow-sm hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#74172F]"
+                  >
+                    <span>Explore Our Work</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
+                  <button
+                    onClick={onOpenPartner}
+                    type="button"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold text-[#74172F] bg-white hover:bg-rose-50 border border-[#74172F]/30 rounded-xl transition-all duration-200 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#74172F]"
+                  >
+                    <HeartHandshake className="w-4 h-4 text-[#74172F]" />
+                    <span>Partner With ARI</span>
+                  </button>
+                </div>
+
+                {/* Verified Institutional Assurance */}
+                <div className="pt-4 flex items-center gap-4 text-xs text-neutral-500">
+                  <div className="flex items-center gap-1.5 text-neutral-700 font-medium">
+                    <ShieldCheck className="w-4 h-4 text-[#74172F]" />
+                    <span>Incorporated in Uganda</span>
+                  </div>
+                  <span className="text-neutral-300">|</span>
+                  <span>Non-Profit Guarantee</span>
+                  <span className="text-neutral-300">|</span>
+                  <span>Mbale District Headquarters</span>
+                </div>
+              </div>
+
+              {/* Right Hero Image Card */}
+              <div className="lg:col-span-5 relative order-first lg:order-none">
+                <div className="relative rounded-2xl overflow-hidden shadow-xl border border-neutral-200 bg-white group">
+                  <img
+                    src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
+                    alt="CPR instruction on an adult training mannequin with medical instructor guiding learners"
+                    className="w-full h-72 sm:h-80 md:h-96 lg:h-96 object-cover object-center group-hover:scale-102 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
+                    <span className="text-xs uppercase tracking-widest text-rose-200 font-semibold mb-1">
+                      Hands-On Resuscitation Training
+                    </span>
+                    <p className="text-sm font-semibold text-white/95">
+                      Realistic manikin training builds the muscle memory and calm confidence needed to restart a heart.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -236,10 +289,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {FOCUS_AREAS.map((area) => (
+            {FOCUS_AREAS.map((area, index) => (
               <div
                 key={area.id}
-                className="bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-2xs hover:shadow-md transition-shadow flex flex-col"
+                className={`${index > 0 ? 'hidden md:flex' : 'flex'} bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-2xs hover:shadow-md transition-shadow flex-col`}
               >
                 <div className="relative h-48 overflow-hidden bg-neutral-100">
                   <img
@@ -286,13 +339,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
             ))}
           </div>
 
-          <div className="mt-10 text-center">
+          <div className="mt-6 text-center md:mt-10">
             <button
               onClick={() => onNavigate('work')}
               type="button"
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-[#74172F] bg-white hover:bg-rose-50 border border-[#74172F]/30 rounded-xl transition-colors shadow-2xs"
+              className="inline-flex w-full items-center justify-center gap-2 px-6 py-3 text-sm font-bold text-[#74172F] bg-white hover:bg-rose-50 border border-[#74172F]/30 rounded-xl transition-colors shadow-2xs md:w-auto"
             >
-              <span>Explore all program details and implementation workflows</span>
+              <span>Explore Our Work</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -407,16 +460,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 </ul>
               </div>
 
-              <div>
-                <button
-                  onClick={() => onNavigate('resources')}
-                  type="button"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-[#74172F] hover:underline"
-                >
-                  <span>Browse full library of educational CPR articles</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
             </div>
 
             <div className="lg:col-span-7">
@@ -440,21 +483,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </h2>
             </div>
 
-            <button
-              onClick={() => onNavigate('news')}
-              type="button"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#74172F] hover:underline"
-            >
-              <span>View all communications</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {VERIFIED_NEWS.map((item) => (
+            {VERIFIED_NEWS.map((item, index) => (
               <article
                 key={item.id}
-                className="bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-2xs flex flex-col justify-between hover:border-neutral-300 transition-colors"
+                className={`${index > 0 ? 'hidden md:flex' : 'flex'} bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-2xs flex-col justify-between hover:border-neutral-300 transition-colors`}
               >
                 <div>
                   <img
@@ -483,16 +518,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   </div>
                 </div>
 
-                <div className="p-5 pt-0">
-                  <button
-                    onClick={() => onNavigate('news')}
-                    type="button"
-                    className="text-xs font-bold text-[#74172F] hover:underline inline-flex items-center gap-1"
-                  >
-                    <span>Read statement</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
               </article>
             ))}
           </div>
@@ -538,13 +563,24 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </div>
 
               <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-[#FAF7F7] rounded-2xl border border-dashed border-[#74172F]/30 text-center space-y-4">
-                <ShieldCheck className="w-12 h-12 text-[#74172F]" />
+                <button
+                  onClick={onOpenCertificate}
+                  type="button"
+                  aria-label="Open certificate image"
+                  className="group w-full overflow-hidden rounded-xl border border-neutral-200 bg-white p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#74172F]"
+                >
+                  <img
+                    src="/assets/license.jpg"
+                    alt="ARI Ltd Certificate of Incorporation"
+                    className="h-40 w-full object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+                  />
+                </button>
                 <div>
                   <h3 className="text-base font-bold text-[#29252A]">
                     Certificate of Incorporation
                   </h3>
                   <p className="text-xs text-neutral-500 mt-1">
-                    Republic of Uganda • Companies Act 2012
+                    Click the certificate to enlarge
                   </p>
                 </div>
                 <button

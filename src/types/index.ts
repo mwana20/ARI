@@ -1,4 +1,4 @@
-export type PageId = 'home' | 'about' | 'work' | 'resources' | 'news' | 'contact';
+export type PageId = 'home' | 'about' | 'work' | 'contact' | 'donate';
 
 export interface SocialLinks {
   facebook: string;
@@ -18,19 +18,6 @@ export interface FocusArea {
   image: string;
   status: 'Operational' | 'Active Initiative' | 'Proposed Program';
   keyInterventions: string[];
-}
-
-export interface CPRResource {
-  id: string;
-  title: string;
-  category: 'Fundamentals' | 'Emergency Steps' | 'Bystander Guidance' | 'Community FAQs' | 'Training Guidance';
-  summary: string;
-  readTime: string;
-  publishedDate: string;
-  authoritativeSource: string;
-  content: string[];
-  keyTakeaways: string[];
-  warningNote?: string;
 }
 
 export interface NewsItem {

@@ -16,9 +16,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About ARI' },
     { id: 'work', label: 'Our Work' },
-    { id: 'resources', label: 'CPR Resources' },
-    { id: 'news', label: 'News & Events' },
     { id: 'contact', label: 'Contact' },
+    { id: 'donate', label: 'Donate' },
   ];
 
   const handleNavClick = (id: PageId) => {
@@ -78,13 +77,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
           <button
             onClick={() => handleNavClick('home')}
             type="button"
-            className="flex items-center gap-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#74172F] rounded-lg p-1"
+            aria-label="Go to the ARI home page"
+            className="hidden lg:flex items-center gap-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#74172F] rounded-lg p-1"
           >
-            {/* Visual Brand Monogram Badge */}
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#74172F] to-[#4A0D20] text-white flex flex-col items-center justify-center shadow-md shadow-[#74172F]/20 font-bold tracking-tighter shrink-0 border border-white/20">
-              <span className="text-sm font-extrabold leading-none">ARI</span>
-              <span className="text-[8px] uppercase tracking-widest text-rose-200 leading-none mt-0.5">UG</span>
-            </div>
+            <img src="/assets/logo.png" alt="" className="h-12 w-auto shrink-0 object-contain" />
 
             <div>
               <span className="block text-base sm:text-lg font-extrabold text-[#74172F] tracking-tight leading-tight">
@@ -94,6 +90,15 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
                 ARI Ltd • Saving Lives Through CPR Education
               </span>
             </div>
+          </button>
+
+          <button
+            onClick={() => handleNavClick('home')}
+            type="button"
+            aria-label="Go to the ARI home page"
+            className="lg:hidden inline-flex items-center justify-center rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#74172F]"
+          >
+            <img src="/assets/logo.png" alt="" className="h-10 w-auto max-w-[150px] object-contain" />
           </button>
 
           {/* Desktop Navigation Links */}
@@ -121,6 +126,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
           {/* Desktop Right Action: Partner With ARI */}
           <div className="hidden lg:flex items-center gap-3">
             <button
+              onClick={() => handleNavClick('donate')}
+              type="button"
+              className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-[#74172F] bg-[#F9E7EA] hover:bg-[#F5DCE2] border border-[#74172F]/20 rounded-xl shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#74172F] focus-visible:ring-offset-2"
+            >
+              <span>Donate</span>
+            </button>
+            <button
               onClick={onOpenPartner}
               type="button"
               className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white bg-[#74172F] hover:bg-[#5e1225] active:bg-[#4A0D20] rounded-xl shadow-sm hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#74172F] focus-visible:ring-offset-2"
@@ -133,9 +145,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 lg:hidden">
             <button
+              onClick={() => handleNavClick('donate')}
+              type="button"
+              className="px-3 py-1.5 text-xs font-bold text-[#74172F] bg-[#F9E7EA] border border-[#74172F]/20 rounded-lg"
+            >
+              Donate
+            </button>
+            <button
               onClick={onOpenPartner}
               type="button"
-              className="px-3 py-1.5 text-xs font-bold text-white bg-[#74172F] rounded-lg sm:inline-flex"
+              className="px-3 py-1.5 text-xs font-bold text-white bg-[#74172F] rounded-lg"
             >
               Partner
             </button>

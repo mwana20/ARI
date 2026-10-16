@@ -7,14 +7,15 @@ import { CertificateModal } from './components/CertificateModal';
 import { HomeView } from './views/HomeView';
 import { AboutView } from './views/AboutView';
 import { WorkView } from './views/WorkView';
-import { ResourcesView } from './views/ResourcesView';
-import { NewsView } from './views/NewsView';
 import { ContactView } from './views/ContactView';
+import { DonationDialog } from './components/DonationDialog';
 import { HeartHandshake, X, Send, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { ARI_REGISTRATION, WHATSAPP_URL } from './data/organizationData';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
+  const [isDonateOpen, setIsDonateOpen] = useState(false);
+  const [pageBeforeDonate, setPageBeforeDonate] = useState<PageId>('home');
   const [isCertificateOpen, setIsCertificateOpen] = useState(false);
   const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
 
@@ -31,13 +32,31 @@ export default function App() {
   const [partnerSubmitting, setPartnerSubmitting] = useState(false);
   const [partnerSuccess, setPartnerSuccess] = useState(false);
 
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   // Listen to browser hash changes if any
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.replace('#', '') as PageId;
-      const validPages: PageId[] = ['home', 'about', 'work', 'resources', 'news', 'contact'];
-      if (validPages.includes(hash)) {
+      const validPages: PageId[] = ['home', 'about', 'work', 'contact', 'donate'];
+      if (hash === 'donate') {
+        setIsDonateOpen(true);
+      } else if (validPages.includes(hash)) {
         setCurrentPage(hash);
+        setIsDonateOpen(false);
+      } else {
+        setCurrentPage('home');
+        setIsDonateOpen(false);
+        if (hash) {
+          window.history.replaceState(window.history.state, '', '#home');
+        }
+      }
+      if (hash !== 'donate') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       }
     };
     handleHash();
@@ -46,9 +65,17 @@ export default function App() {
   }, []);
 
   const handleNavigate = (page: PageId) => {
+    if (page === 'donate') {
+      setPageBeforeDonate(currentPage);
+      setIsDonateOpen(true);
+      window.location.hash = page;
+      return;
+    }
+
     setCurrentPage(page);
+    setIsDonateOpen(false);
     window.location.hash = page;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   };
 
   const handlePartnerSubmit = async (e: React.FormEvent) => {
@@ -109,24 +136,16 @@ export default function App() {
             onOpenPartner={() => setIsPartnerModalOpen(true)}
           />
         )}
-        {currentPage === 'resources' && (
-          <ResourcesView
-            onNavigate={handleNavigate}
-            onOpenPartner={() => setIsPartnerModalOpen(true)}
-          />
-        )}
-        {currentPage === 'news' && (
-          <NewsView
-            onNavigate={handleNavigate}
-            onOpenPartner={() => setIsPartnerModalOpen(true)}
-          />
-        )}
         {currentPage === 'contact' && (
           <ContactView
             onOpenCertificate={() => setIsCertificateOpen(true)}
           />
         )}
       </main>
+
+      {isDonateOpen && (
+        <DonationDialog onClose={() => handleNavigate(pageBeforeDonate)} />
+      )}
 
       {/* Persistent Floating WhatsApp Button */}
       <WhatsAppFloatingButton />
