@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PageId } from '../types';
 import { ARI_REGISTRATION, WHATSAPP_URL, ARI_SOCIAL_LINKS } from '../data/organizationData';
 import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Building2, ExternalLink, ShieldCheck } from 'lucide-react';
+import { prependLocalStorageItem } from '../utils/storage';
 
 interface ContactViewProps {
   initialSubject?: string;
@@ -71,10 +72,8 @@ export const ContactView: React.FC<ContactViewProps> = ({
       if (response.ok) {
         const data = await response.json();
         setSubmissionRef(data.referenceId || `ARI-${Date.now().toString().slice(-6)}`);
+        prependLocalStorageItem('ari_submissions', payload);
         setStatus('success');
-        // Store in local storage for transparency
-        const existing = JSON.parse(localStorage.getItem('ari_submissions') || '[]');
-        localStorage.setItem('ari_submissions', JSON.stringify([payload, ...existing]));
         return;
       }
     } catch {
@@ -83,8 +82,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
 
     // Local client persistence fallback
     const ref = `ARI-${Date.now().toString().slice(-6)}`;
-    const existing = JSON.parse(localStorage.getItem('ari_submissions') || '[]');
-    localStorage.setItem('ari_submissions', JSON.stringify([{ ...payload, referenceId: ref }, ...existing]));
+    prependLocalStorageItem('ari_submissions', { ...payload, referenceId: ref });
     setSubmissionRef(ref);
     setStatus('success');
   };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Lightbulb, Sparkles, CheckCircle2, Copy, Check, Users, Building, School, Church, Truck, ShoppingBag, Briefcase } from 'lucide-react';
 
 interface EventPlan {
@@ -157,14 +157,39 @@ const CURATED_EVENT_PLANS: Record<string, EventPlan> = {
   },
 };
 
+const isEventPlan = (value: unknown): value is EventPlan => {
+  if (typeof value !== 'object' || value === null) return false;
+  const plan = value as Record<string, unknown>;
+  const requiredTextFields = [
+    'title',
+    'targetSetting',
+    'theme',
+    'audienceEngagementFormat',
+    'evaluationMetric',
+  ];
+
+  return (
+    requiredTextFields.every((field) => typeof plan[field] === 'string') &&
+    ['keyActivities', 'vernacularTalkingPoints', 'logisticsChecklist'].every(
+      (field) => Array.isArray(plan[field]) && plan[field].every((item) => typeof item === 'string')
+    )
+  );
+};
+
 export const EventIdeasHub: React.FC = () => {
   const [selectedSetting, setSelectedSetting] = useState('schools');
   const [customGoal, setCustomGoal] = useState('');
   const [currentPlan, setCurrentPlan] = useState<EventPlan>(CURATED_EVENT_PLANS['schools']);
   const [isGenerating, setIsGenerating] = useState(false);
   const [copied, setCopied] = useState(false);
+  const generationIdRef = useRef(0);
+
+  useEffect(() => () => {
+    generationIdRef.current += 1;
+  }, []);
 
   const handleGenerate = async (settingId: string) => {
+    const generationId = ++generationIdRef.current;
     setSelectedSetting(settingId);
     setIsGenerating(true);
 
@@ -179,9 +204,12 @@ export const EventIdeasHub: React.FC = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        if (data.plan) {
-          setCurrentPlan(data.plan);
+        const data: unknown = await response.json();
+        const plan = typeof data === 'object' && data !== null
+          ? (data as { plan?: unknown }).plan
+          : undefined;
+        if (generationId === generationIdRef.current && isEventPlan(plan)) {
+          setCurrentPlan(plan);
           setIsGenerating(false);
           return;
         }
@@ -190,15 +218,14 @@ export const EventIdeasHub: React.FC = () => {
       // Continue to fallback
     }
 
-    // Curated local plan
-    setTimeout(() => {
-      const basePlan = CURATED_EVENT_PLANS[settingId] || CURATED_EVENT_PLANS['schools'];
-      setCurrentPlan(basePlan);
-      setIsGenerating(false);
-    }, 400);
+    if (generationId !== generationIdRef.current) return;
+
+    const basePlan = CURATED_EVENT_PLANS[settingId] || CURATED_EVENT_PLANS['schools'];
+    setCurrentPlan(basePlan);
+    setIsGenerating(false);
   };
 
-  const copyPlanToClipboard = () => {
+  const copyPlanToClipboard = async () => {
     const text = `
 ACUTE RESUSCITATION INITIATIVE (ARI) LTD
 EVENT CONCEPT: ${currentPlan.title}
@@ -221,10 +248,14 @@ EVALUATION:
 ${currentPlan.evaluationMetric}
     `.trim();
 
-    navigator.clipboard.writeText(text).then(() => {
+    try {
+      if (!navigator.clipboard?.writeText) return;
+      await navigator.clipboard.writeText(text);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    });
+      window.setTimeout(() => setCopied(false), 2500);
+    } catch {
+      setCopied(false);
+    }
   };
 
   return (

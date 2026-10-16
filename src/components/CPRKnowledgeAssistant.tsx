@@ -46,6 +46,9 @@ export const CPRKnowledgeAssistant: React.FC = () => {
   const [isMetronomeActive, setIsMetronomeActive] = useState(false);
   const audioContextRef = useRef<AudioContext | null>(null);
   const metronomeIntervalRef = useRef<number | null>(null);
+  const fallbackTimeoutRef = useRef<number | null>(null);
+  const requestControllerRef = useRef<AbortController | null>(null);
+  const requestGenerationRef = useRef(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -56,47 +59,70 @@ export const CPRKnowledgeAssistant: React.FC = () => {
     scrollToBottom();
   }, [messages, isLoading]);
 
+  const stopMetronome = () => {
+    if (metronomeIntervalRef.current !== null) {
+      window.clearInterval(metronomeIntervalRef.current);
+      metronomeIntervalRef.current = null;
+    }
+
+    const context = audioContextRef.current;
+    audioContextRef.current = null;
+    if (context && context.state !== 'closed') {
+      void context.close().catch(() => {});
+    }
+  };
+
   // 110 BPM Metronome for practicing 100-120 bpm rhythm
   const toggleMetronome = () => {
     if (isMetronomeActive) {
-      if (metronomeIntervalRef.current) clearInterval(metronomeIntervalRef.current);
+      stopMetronome();
       setIsMetronomeActive(false);
-    } else {
-      try {
-        const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-        const ctx = new AudioCtx();
-        audioContextRef.current = ctx;
+      return;
+    }
 
-        const intervalMs = (60 / 110) * 1000; // 110 bpm ~ 545ms
-        const playBeep = () => {
-          if (!audioContextRef.current) return;
-          const osc = audioContextRef.current.createOscillator();
-          const gain = audioContextRef.current.createGain();
-          osc.connect(gain);
-          gain.connect(audioContextRef.current.destination);
-          osc.frequency.value = 880;
-          gain.gain.setValueAtTime(0.12, audioContextRef.current.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, audioContextRef.current.currentTime + 0.08);
-          osc.start();
-          osc.stop(audioContextRef.current.currentTime + 0.08);
-        };
+    try {
+      const AudioCtx = window.AudioContext ??
+        (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!AudioCtx) return;
 
-        playBeep();
-        const id = window.setInterval(playBeep, intervalMs);
-        metronomeIntervalRef.current = id;
-        setIsMetronomeActive(true);
-      } catch (err) {
-        console.error('Metronome audio error:', err);
-      }
+      const ctx = new AudioCtx();
+      audioContextRef.current = ctx;
+
+      const intervalMs = (60 / 110) * 1000;
+      const playBeep = () => {
+        const audioContext = audioContextRef.current;
+        if (!audioContext || audioContext.state === 'closed') return;
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        osc.frequency.value = 880;
+        gain.gain.setValueAtTime(0.12, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.08);
+        osc.start();
+        osc.stop(audioContext.currentTime + 0.08);
+      };
+
+      void ctx.resume().catch(() => {});
+      playBeep();
+      metronomeIntervalRef.current = window.setInterval(playBeep, intervalMs);
+      setIsMetronomeActive(true);
+    } catch (err) {
+      stopMetronome();
+      setIsMetronomeActive(false);
+      console.error('Metronome audio error:', err);
     }
   };
 
   useEffect(() => {
     return () => {
-      if (metronomeIntervalRef.current) clearInterval(metronomeIntervalRef.current);
-      if (audioContextRef.current) {
-        audioContextRef.current.close().catch(() => {});
+      requestGenerationRef.current += 1;
+      requestControllerRef.current?.abort();
+      if (fallbackTimeoutRef.current !== null) {
+        window.clearTimeout(fallbackTimeoutRef.current);
+        fallbackTimeoutRef.current = null;
       }
+      stopMetronome();
     };
   }, []);
 
@@ -108,6 +134,9 @@ export const CPRKnowledgeAssistant: React.FC = () => {
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
     setIsLoading(true);
+    const requestGeneration = ++requestGenerationRef.current;
+    const controller = new AbortController();
+    requestControllerRef.current = controller;
 
     // Try server endpoint first; fall back to curated database if needed
     try {
@@ -115,11 +144,13 @@ export const CPRKnowledgeAssistant: React.FC = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: query }),
+        signal: controller.signal,
       });
 
       if (response.ok) {
         const data = await response.json();
-        if (data.answer) {
+        if (requestGeneration !== requestGenerationRef.current) return;
+        if (typeof data.answer === 'string' && data.answer.trim()) {
           setMessages((prev) => [
             ...prev,
             {
@@ -129,6 +160,7 @@ export const CPRKnowledgeAssistant: React.FC = () => {
             },
           ]);
           setIsLoading(false);
+          requestControllerRef.current = null;
           return;
         }
       }
@@ -136,8 +168,13 @@ export const CPRKnowledgeAssistant: React.FC = () => {
       // Continue to fallback
     }
 
+    if (requestGeneration !== requestGenerationRef.current) return;
+    requestControllerRef.current = null;
+
     // Curated local answer or smart fallback
-    setTimeout(() => {
+    fallbackTimeoutRef.current = window.setTimeout(() => {
+      if (requestGeneration !== requestGenerationRef.current) return;
+      fallbackTimeoutRef.current = null;
       const matched = Object.keys(CURATED_ANSWERS).find(
         (key) => key.toLowerCase() === query.toLowerCase() || query.toLowerCase().includes(key.toLowerCase())
       );

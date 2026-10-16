@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ARI_REGISTRATION } from '../data/organizationData';
 import { Info, X } from 'lucide-react';
 
@@ -7,12 +7,15 @@ interface DonationDialogProps {
 }
 
 export const DonationDialog: React.FC<DonationDialogProps> = ({ onClose }) => {
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
+      if (event.key === 'Escape') onCloseRef.current();
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -20,7 +23,7 @@ export const DonationDialog: React.FC<DonationDialogProps> = ({ onClose }) => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onClose]);
+  }, []);
 
   return (
     <div

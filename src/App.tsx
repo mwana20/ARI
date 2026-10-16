@@ -11,6 +11,7 @@ import { ContactView } from './views/ContactView';
 import { DonationDialog } from './components/DonationDialog';
 import { HeartHandshake, X, Send, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { ARI_REGISTRATION, WHATSAPP_URL } from './data/organizationData';
+import { prependLocalStorageItem } from './utils/storage';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
@@ -43,6 +44,8 @@ export default function App() {
     const handleHash = () => {
       const hash = window.location.hash.replace('#', '') as PageId;
       const validPages: PageId[] = ['home', 'about', 'work', 'contact', 'donate'];
+      setIsPartnerModalOpen(false);
+      setPartnerSuccess(false);
       if (hash === 'donate') {
         setIsDonateOpen(true);
       } else if (validPages.includes(hash)) {
@@ -65,6 +68,9 @@ export default function App() {
   }, []);
 
   const handleNavigate = (page: PageId) => {
+    setIsPartnerModalOpen(false);
+    setPartnerSuccess(false);
+
     if (page === 'donate') {
       setPageBeforeDonate(currentPage);
       setIsDonateOpen(true);
@@ -84,6 +90,7 @@ export default function App() {
 
     const payload = {
       ...partnerForm,
+      message: partnerForm.proposal,
       inquiryType: 'partnership',
       timestamp: new Date().toISOString(),
     };
@@ -98,8 +105,7 @@ export default function App() {
       // Local fallback
     }
 
-    const existing = JSON.parse(localStorage.getItem('ari_partnerships') || '[]');
-    localStorage.setItem('ari_partnerships', JSON.stringify([payload, ...existing]));
+    prependLocalStorageItem('ari_partnerships', payload);
 
     setPartnerSubmitting(false);
     setPartnerSuccess(true);
