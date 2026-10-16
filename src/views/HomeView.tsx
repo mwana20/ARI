@@ -43,7 +43,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         <div className="lg:hidden">
           <div className="relative isolate min-h-[500px] bg-[#1e221d] sm:min-h-[520px]">
             <img
-              src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
+              src="https://pub-b2e691025f20417aaae7fc6f66f2ac7d.r2.dev/ARI/Home.png"
               alt="CPR instruction on an adult training mannequin with medical instructor guiding learners"
               className="absolute inset-0 h-full w-full object-cover"
             />
@@ -160,7 +160,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <div className="lg:col-span-5 relative order-first lg:order-none">
                 <div className="relative rounded-2xl overflow-hidden shadow-xl border border-neutral-200 bg-white group">
                   <img
-                    src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
+                    src="https://pub-b2e691025f20417aaae7fc6f66f2ac7d.r2.dev/ARI/Home.png"
                     alt="CPR instruction on an adult training mannequin with medical instructor guiding learners"
                     className="w-full h-72 sm:h-80 md:h-96 lg:h-96 object-cover object-center group-hover:scale-102 transition-transform duration-500"
                   />

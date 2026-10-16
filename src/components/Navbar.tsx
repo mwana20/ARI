@@ -17,7 +17,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
     { id: 'about', label: 'About ARI' },
     { id: 'work', label: 'Our Work' },
     { id: 'contact', label: 'Contact' },
-    { id: 'donate', label: 'Donate' },
   ];
 
   const handleNavClick = (id: PageId) => {

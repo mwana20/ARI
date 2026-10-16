@@ -65,7 +65,7 @@ export const FOCUS_AREAS: FocusArea[] = [
     description: 'Promote public awareness and practical CPR education so everyday community members—from market vendors and transport operators to family caregivers—understand how to recognize cardiac emergencies and respond with confidence.',
     targetAudience: 'Local community members, market associations, transport hubs, civic groups',
     impactObjective: 'Equip lay citizens with hands-only CPR competence and the confidence to intervene immediately.',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80',
+    image: 'https://pub-b2e691025f20417aaae7fc6f66f2ac7d.r2.dev/ARI/stepbystep-cpr.avif',
     status: 'Active Initiative',
     keyInterventions: [
       'Hands-only adult chest compression workshops using realistic manikins',
@@ -81,7 +81,7 @@ export const FOCUS_AREAS: FocusArea[] = [
     description: 'Encourage widespread CPR awareness through community barazas, targeted radio messaging, clear educational posters, and digital public health materials that debunk resuscitation misconceptions.',
     targetAudience: 'General public across urban centers and rural districts of Uganda',
     impactObjective: 'Shift resuscitation from an unfamiliar clinical procedure to an essential civic responsibility.',
-    image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1000&q=80',
+    image: 'https://pub-b2e691025f20417aaae7fc6f66f2ac7d.r2.dev/ARI/comun.png',
     status: 'Active Initiative',
     keyInterventions: [
       'Community radio broadcasts explaining the signs of sudden cardiac collapse',
@@ -97,7 +97,7 @@ export const FOCUS_AREAS: FocusArea[] = [
     description: 'Support efforts to make age-appropriate CPR awareness and emergency preparedness an integral part of educational environments, empowering students, prefects, and teachers to safeguard their school communities.',
     targetAudience: 'Secondary school students, primary teachers, university health clubs',
     impactObjective: 'Build early muscle memory and leadership instincts for acute emergency situations.',
-    image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=80',
+    image: 'https://pub-b2e691025f20417aaae7fc6f66f2ac7d.r2.dev/ARI/school.png',
     status: 'Proposed Program',
     keyInterventions: [
       'Peer-led junior resuscitation demonstrations during school health assemblies',
@@ -113,7 +113,7 @@ export const FOCUS_AREAS: FocusArea[] = [
     description: 'Support opportunities to strengthen CPR knowledge and relevant resuscitation skills among primary healthcare workers, clinical officers, nurses, and allied staff, aligned with actual accredited continuing professional education standards.',
     targetAudience: 'Health Center III & IV staff, nursing students, private dispensary teams',
     impactObjective: 'Standardize high-quality Basic Life Support (BLS) protocols across primary care tiers.',
-    image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80',
+    image: 'https://pub-b2e691025f20417aaae7fc6f66f2ac7d.r2.dev/ARI/About.png',
     status: 'Proposed Program',
     keyInterventions: [
       'Resuscitation protocol refreshers for rural health center personnel',
@@ -145,7 +145,7 @@ export const FOCUS_AREAS: FocusArea[] = [
     description: 'Promote greater recognition of CPR education as a vital component of public health and disaster preparedness in Uganda, advocating for accessible public defibrillation and community emergency training frameworks.',
     targetAudience: 'Policy influencers, local government leaders, health sector advocates',
     impactObjective: 'Foster policy environments that encourage bystander intervention and emergency accessibility.',
-    image: 'https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&w=1000&q=80',
+    image: 'https://pub-b2e691025f20417aaae7fc6f66f2ac7d.r2.dev/ARI/urban.png',
     status: 'Active Initiative',
     keyInterventions: [
       'Documenting bystander intervention challenges in non-urban Ugandan settings',

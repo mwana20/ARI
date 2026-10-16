@@ -136,7 +136,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
             <div className="absolute inset-0 z-0 lg:relative lg:inset-auto lg:col-span-5">
               <div className="absolute inset-0 overflow-hidden lg:relative lg:rounded-3xl lg:border lg:border-white/10 lg:shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80"
+                  src="https://pub-b2e691025f20417aaae7fc6f66f2ac7d.r2.dev/ARI/About.png"
                   alt="Consultation and communication between community teams and health advocates"
                   className="h-full w-full object-cover lg:h-[22rem]"
                 />
